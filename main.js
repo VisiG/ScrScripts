@@ -2,7 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRecharger = require('role.recharger');
-var roleRoadRepairer = require('role.raodRepairer');
+var roleRoadRepairer = require('role.roadRepairer');
 var roadCheckInterval = 50;
 var currentRoadTimer = 0;
 
