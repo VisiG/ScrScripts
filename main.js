@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRecharger = require('role.recharger');
 var roleRoadRepairer = require('role.roadRepairer');
+var roleReserver = require('role.reserver');
 
 var roadCheckInterval = 50;
 var currentRoadTimer = 0;
@@ -11,6 +12,8 @@ var rechargerHomeSourceID = '5982fd2fb097071b4adbedb0';
 
 var interSourceRoomPosition = new RoomPosition(29, 14, 'W19S16');
 var interSourceID = '5982fd2fb097071b4adbedb4';
+
+var reserverRoomPosition = new RoomPosition(37, 24, 'W19S16');
 
 module.exports.loop = function () {
     for(var name in Memory.creeps) {
@@ -67,6 +70,8 @@ module.exports.loop = function () {
     var interRechargers = _.filter(Game.creeps, (creep) => creep.memory.role == 'interRecharger');
     //console.log('builder: ' + harvesters.length);
     var roadRepairer = _.filter(Game.creeps, (creep) => creep.memory.role == 'roadRepairer');
+    //console.log('builder: ' + harvesters.length);
+    var reservers = _.filter(Game.creeps, (creep) => creep.memory.role == 'reserver');
     //console.log('builder: ' + harvesters.length);
 
     var roomEnergy = currentSpawn.room.energyCapacityAvailable;
@@ -261,6 +266,17 @@ module.exports.loop = function () {
         }
         
     }
+    else if (reservers.length < 1)
+    {        
+        if(roomEnergy >= 1200)
+        {
+            var newName = currentSpawn.createCreep([CLAIM, WORK, TOUGH ,TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
+                                                    MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE], undefined, 
+                {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
+            console.log('Spawning new 1300 inter recharger: ' + newName);
+        }
+        
+    }
     
     if(currentSpawn.spawning) {
         var spawningCreep = Game.creeps[currentSpawn.spawning.name];
@@ -315,6 +331,9 @@ module.exports.loop = function () {
         }
         else if(creep.memory.role == 'roadRepairer') {
             roleRoadRepairer.run(creep);
+        }
+        else if(creep.memory.role == 'reserver') {
+            roleReserver.run(creep);
         }
    
 
