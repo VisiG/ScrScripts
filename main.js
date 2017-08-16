@@ -286,8 +286,13 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
-    var tower = Game.getObjectById('599086875beb6224080efa5b');
-    if(tower) {
+     var towers = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType == STRUCTURE_TOWER);
+                        }
+                });
+    for(var tower in towers);
+    {
         if(tower.energy/tower.energyCapacity > 0.5)
         {
             var closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
