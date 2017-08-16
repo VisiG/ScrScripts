@@ -23,7 +23,7 @@ var roleReserver = {
             {
                 controller = hownSpawn.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCUTRE_CONTROLLER)}}
+                        return (structure.structureType == STRUCUTRE_CONTROLLER)}});
                 if(creep.reserveController(controller[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(controller[0], {visualizePathStyle: {stroke: '#ffaa00'}});
                 }        
