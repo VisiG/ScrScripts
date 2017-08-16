@@ -324,7 +324,7 @@ module.exports.loop = function () {
             {
                 creep.memory.reverseFilling = false;                
             }            
-            creep.memory.emptyLink = '5994774086537c0bdbbb2fa4'';
+            creep.memory.emptyLink = '5994774086537c0bdbbb2fa4';
             roleHarvester.run(creep);
             harvesterCnt++;
         }
