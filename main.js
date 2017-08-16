@@ -5,7 +5,7 @@ var roleRecharger = require('role.recharger');
 var roleRoadRepairer = require('role.roadRepairer');
 var roleReserver = require('role.reserver');
 
-var roadCheckInterval = 50;
+var linkCheckInterval = 20;
 var currentRoadTimer = 0;
 
 var rechargerHomeSourceID = '5982fd2fb097071b4adbedb0';
@@ -29,34 +29,31 @@ module.exports.loop = function () {
        currentSpawn.memory.currentRoadTimer = 0; 
     }
     currentSpawn.memory.currentRoadTimer++;
-    if(currentSpawn.memory.currentRoadTimer >= roadCheckInterval)
+    if(currentSpawn.memory.currentRoadTimer >= linkCheckInterval)
     {
-        console.log("Checking roads");
+        console.log("Checking links");
         
-        if(currentSpawn.memory.nextRoadPositionX != 0)
-        {
-            console.log("Creating road: " + currentSpawn.memory.nextRoadPositionX + " " + currentSpawn.memory.nextRoadPositionY);
-            var result = currentSpawn.room.createConstructionSite(currentSpawn.memory.nextRoadPositionX, currentSpawn.memory.nextRoadPositionY, STRUCTURE_ROAD);
-            console.log(result);
-            currentSpawn.memory.nextRoadPositionX = 0;
-            currentSpawn.memory.nextRoadPositionY = 0;
-        }
-        
-        var results = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
-                return object.structureType === STRUCTURE_ROAD
+        var storage = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
+                return object.structureType === STRUCTURE_STORAGE
             }});
-        for (var ext in results){
-            var myRoad = results[ext];
-            if(myRoad.ticksToDecay < 500 && myRoad.hits < 1000)
-            {
-                console.log("Replacing road");
-                var pos = myRoad.pos;
-                console.log(pos);
-                myRoad.destroy();
-                currentSpawn.memory.nextRoadPositionX = pos.x;
-                currentSpawn.memory.nextRoadPositionY = pos.y;
-            }
+        var links = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
+                return object.structureType === STRUCTURE_LINKS
+            }});
+        var link1Distance = storage.pos.getRangeTo(links[0]);
+        var link2Distance = storage.pos.getRangeTo(links[1]);
+      
+        var sender = links[0];
+        var receiver = links[1];
+        if(link1Distance < link2Distance)
+        {
+            sender = links[1];
+            receiver = links[2];
         }
+        if(sender.energy >= sender.energyCapacity && receiver.energy < receiver.energyCapacity)
+        {
+            sender.transferEnergy(receiver, (receiver.energyCapacity - receiver.energy));
+        }
+        
         currentSpawn.memory.currentRoadTimer = 0;
     }
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' );
