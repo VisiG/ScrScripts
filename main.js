@@ -67,6 +67,8 @@ module.exports.loop = function () {
     //console.log('builder: ' + harvesters.length);
     var interRechargers = _.filter(Game.creeps, (creep) => creep.memory.role == 'interRecharger');
     //console.log('builder: ' + harvesters.length);
+    var linkRechargers = _.filter(Game.creeps, (creep) => creep.memory.role == 'linkRecharger');
+    //console.log('builder: ' + harvesters.length);
     var roadRepairer = _.filter(Game.creeps, (creep) => creep.memory.role == 'roadRepairer');
     //console.log('builder: ' + harvesters.length);
     var reservers = _.filter(Game.creeps, (creep) => creep.memory.role == 'reserver');
@@ -274,6 +276,16 @@ module.exports.loop = function () {
         }
         
     }
+    else if (linkRechargers.length < 1)
+    {        
+        if(roomEnergy >= 250)
+        {
+            var newName = currentSpawn.createCreep([CARRY, CARRY,MOVE  ,MOVE], undefined, 
+                {role: 'linkRecharger', homeSpawn: currentSpawn.id});
+            console.log('Spawning new 200 linkRecharger: ' + newName);
+        }
+        
+    }
     
     if(currentSpawn.spawning) {
         var spawningCreep = Game.creeps[currentSpawn.spawning.name];
@@ -349,6 +361,10 @@ module.exports.loop = function () {
         else if(creep.memory.role == 'reserver') {
             creep.memory.targetRoomPosition = reserverRoomPosition ;
             roleReserver.run(creep);
+        }
+        else if(creep.memory.role == 'linkRecharger') {
+            creep.memory.targetSource = Game.getObjectByID('5994774086537c0bdbbb2fa4');
+            roleRecharger.run(creep);
         }
    
 
