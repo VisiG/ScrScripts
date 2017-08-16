@@ -23,9 +23,10 @@ var roleHarvester = {
 			    for(var resIdx in creep.carry)
 			    {
 	                console.log(resIdx);
-				    if(creep.transfer(targets[0], resIdx) == ERR_NOT_IN_RANGE) {
+				    if(creep.transfer(targets[0], resIdx) == ERR_NOT_IN_RANGE) 
+					{
     					creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-    					    return;
+    					return;
     				}
 				}	
 			}
