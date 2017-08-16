@@ -3,7 +3,7 @@ var roleReserver = {
     /** @param {Creep} creep **/
     run: function(creep) {
         var hownSpawn = Game.getObjectById(creep.memory.homeSpawn);
-        var targetRoomPosition = Game.getObjectById(creep.memory.targetRoomPosition);
+        var targetRoomPosition = creep.memory.targetRoomPosition;
         
         if(creep.carry.energy < creep.carryCapacity) {
             source = hownSpawn.room.find(FIND_STRUCTURES, {
