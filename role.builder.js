@@ -33,7 +33,7 @@ var roleBuilder = {
                 else
                 {
                     const targets = hownSpawn.room.find(FIND_STRUCTURES, {
-                        filter: object => {object.hits < object.hitsMax && object.structureType != STRUCTURE_WALL}
+                        filter: object => object.hits < object.hitsMax && object.structureType != STRUCTURE_WALL
                     });
                     
                     targets.sort((a,b) => a.hits - b.hits);
@@ -45,7 +45,20 @@ var roleBuilder = {
                     }
                     else
                     {
-                        creep.moveTo(16, 25, {visualizePathStyle: {stroke: '#ffffff'}});
+			 			var source = Game.getObjectById('5982fd2fb097071b4adbedb0');
+			   			var link = hownSpawn.room.findInRange(FIND_STRUCTURES,5, {
+							filter: object => object.structureType != STRUCTURE_LINK}
+						});
+			    		if(link.length && link[0].energy < link[0].energyCapacity)
+						{
+							if(creep.transfer(link[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+								creep.moveTo(link[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+							}
+						}
+						else
+						{
+                        	creep.moveTo(16, 25, {visualizePathStyle: {stroke: '#ffffff'}});
+						}
                     }
                 }
             }
