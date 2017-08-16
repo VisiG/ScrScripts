@@ -10,7 +10,7 @@ var roleHarvester = {
 	    if(creep.memory.needEnergy && (creep.carry.energy < creep.carryCapacity)) {
 	        var energy = creep.room.find(FIND_DROPPED_RESOURCES
             );
-    
+		}
 	    totalResources = _.sum(creep.carry) - creep.carry.energy;
 	    if(totalResources > 0)
 	    {
