@@ -2,16 +2,7 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        //console.log(creep.carry.energy + ' ' + creep.carryCapacity);
-        if(creep.carry.energy == creep.carryCapacity)
-        {
-            creep.memory.needEnergy = false;
-        }
-	    if(creep.memory.needEnergy && (creep.carry.energy < creep.carryCapacity)) {
-	        var energy = creep.room.find(FIND_DROPPED_RESOURCES
-            );
-		}
-	    totalResources = _.sum(creep.carry) - creep.carry.energy;
+		totalResources = _.sum(creep.carry) - creep.carry.energy;
 	    if(totalResources > 0)
 	    {
 		    var targets = creep.room.find(FIND_STRUCTURES, {
@@ -26,16 +17,25 @@ var roleHarvester = {
 				    if(creep.transfer(targets[0], resIdx) == ERR_NOT_IN_RANGE) 
 					{
     					creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-    					return;
     				}
+    				return;
 				}	
 			}
-            else if (energy.length) {
-                if(creep.pickup(energy[0]) != 0)
-                {
+		}
+        //console.log(creep.carry.energy + ' ' + creep.carryCapacity);
+        if(creep.carry.energy == creep.carryCapacity)
+        {
+            creep.memory.needEnergy = false;
+        }
+	    if(creep.memory.needEnergy && (creep.carry.energy < creep.carryCapacity)) {
+	        var energy = creep.room.find(FIND_DROPPED_RESOURCES
+            );
+		}
+	    if (energy.length) {
+            if(creep.pickup(energy[0]) != 0)
+			{
                     creep.moveTo(energy[0], {visualizePathStyle: {stroke: '#ffffff'}});
-                }
-                console.log('found ' + energy[0].energy + ' energy at ', energy[0].pos);
+					console.log('found ' + energy[0].energy + ' energy at ', energy[0].pos);
             }
             else
             {
