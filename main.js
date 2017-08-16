@@ -196,7 +196,7 @@ module.exports.loop = function () {
         }
         
     }
-    else if (rechargers.length < 2)
+    else if (rechargers.length < 1)
     {
         if(roomEnergy >= 1200)
         {
