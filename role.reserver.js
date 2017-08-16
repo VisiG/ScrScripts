@@ -8,11 +8,11 @@ var roleReserver = {
         if(creep.carry.energy < creep.carryCapacity) {
             source = hownSpawn.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_STORAGE)}}
+                        return (structure.structureType == STRUCTURE_STORAGE)}});
             if(creep.harvest(source[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
-	      }
+	}
         else
         {
             if(creep.room.name != targetRoomPosition.name)
