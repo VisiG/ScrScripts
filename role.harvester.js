@@ -84,7 +84,7 @@ var roleHarvester = {
                 }
                 else
                 {
-                    creep.moveTo(16, 25, {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.moveTo(27, 33, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
             if(creep.carry.energy == 0)
