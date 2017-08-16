@@ -54,7 +54,7 @@ module.exports.loop = function () {
         }
         if(sender.energy >= sender.energyCapacity*0.99 && receiver.energy < receiver.energyCapacity)
         {
-            var amountToTransfer = Math.min((receiver.energyCapacity - receiver.energy), sender.energyCapacity - sender.energy);
+            var amountToTransfer = Math.max((receiver.energyCapacity - receiver.energy), sender.energyCapacity - sender.energy);
             sender.transferEnergy(receiver, amountToTransfer);
         }
     }
