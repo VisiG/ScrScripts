@@ -2,7 +2,7 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-	    var doReverse = creep.reverseFilling;
+	    var doReverse = creepp.memory.reverseFilling;
 		totalResources = _.sum(creep.carry) - creep.carry.energy;
 	    if(totalResources > 0)
 	    {
