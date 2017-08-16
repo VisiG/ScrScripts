@@ -54,8 +54,8 @@ module.exports.loop = function () {
         }
         if(sender.energy >= sender.energyCapacity*0.99 && receiver.energy < receiver.energyCapacity)
         {
-            var amountToTransfer = Math.max((receiver.energyCapacity - receiver.energy), sender.energyCapacity - sender.energy);
-            sender.transferEnergy(receiver, amountToTransfer);
+            //var amountToTransfer = Math.max((receiver.energyCapacity - receiver.energy), sender.energyCapacity - sender.energy);
+            sender.transferEnergy(receiver);//, amountToTransfer);
         }
     }
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' );
