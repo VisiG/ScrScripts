@@ -116,7 +116,15 @@ module.exports.loop = function () {
     //}
     else if (upgraders.length < 3)
     {
-        if(roomEnergy >= 1200)
+        if(roomEnergy >= 1800)
+        {
+            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
+                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                                                    MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
+                                                    MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+            console.log('Spawning new 1200 upgrader: ' + newName);
+        }
+        else if(roomEnergy >= 1200)
         {
             var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
             console.log('Spawning new 1200 upgrader: ' + newName);
@@ -227,7 +235,17 @@ module.exports.loop = function () {
     }
     else if (interRechargers.length < 2)
     {
-        if(roomEnergy >= 1300)
+        
+        if(roomEnergy >= 1800)
+        {
+            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK,
+                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                                                    MOVE ,MOVE ,MOVE,MOVE , MOVE ,
+                                                    MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE , MOVE, MOVE], undefined, 
+                {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
+            console.log('Spawning new 1300 inter recharger: ' + newName);
+        }
+        else if(roomEnergy >= 1300)
         {
             var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY,MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, 
                 {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
