@@ -31,7 +31,6 @@ module.exports.loop = function () {
     currentSpawn.memory.currentRoadTimer++;
     if(currentSpawn.memory.currentRoadTimer >= linkCheckInterval)
     {
-        
         currentSpawn.memory.currentRoadTimer = 0;
         console.log("Checking links");
         
@@ -41,15 +40,17 @@ module.exports.loop = function () {
         var links = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
                 return object.structureType == STRUCTURE_LINK
             }});
-        var link1Distance = storage.pos.getRangeTo(links[0]);
-        var link2Distance = storage.pos.getRangeTo(links[1]);
+        console.log(links[0]);
+        console.log(links[1]);
+        var link1Distance = storage[0].pos.getRangeTo(links[0]);
+        var link2Distance = storage[0].pos.getRangeTo(links[1]);
       
         var sender = links[0];
         var receiver = links[1];
         if(link1Distance < link2Distance)
         {
             sender = links[1];
-            receiver = links[2];
+            receiver = links[0];
         }
         if(sender.energy >= sender.energyCapacity && receiver.energy < receiver.energyCapacity)
         {
