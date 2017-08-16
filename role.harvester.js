@@ -2,6 +2,7 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+	    var doReverse = creep.reverseFilling;
 		totalResources = _.sum(creep.carry) - creep.carry.energy;
 	    if(totalResources > 0)
 	    {
@@ -87,6 +88,10 @@ var roleHarvester = {
                     }
             });
             if(targets.length > 0) {
+				if(creep.doReverse)
+				{
+					targets = targets.Reverse();
+				}
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
