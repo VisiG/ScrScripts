@@ -272,8 +272,8 @@ module.exports.loop = function () {
         {
             var newName = currentSpawn.createCreep([CLAIM, WORK, TOUGH ,TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
                                                     MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE], undefined, 
-                {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
-            console.log('Spawning new 1300 inter recharger: ' + newName);
+                {role: 'reserver', homeSpawn: currentSpawn.id, targetSource: reserverRoomPosition });
+            console.log('Spawning new 1200 reserver: ' + newName);
         }
         
     }
