@@ -46,7 +46,7 @@ var roleBuilder = {
                     else
                     {
 			 			var source = Game.getObjectById('5982fd2fb097071b4adbedb0');
-			   			var link = hownSpawn.room.findInRange(FIND_STRUCTURES,5, {
+			   			var link = source.pos.findInRange(FIND_STRUCTURES,5, {
 							filter: object => object.structureType != STRUCTURE_LINK
 						});
 			    		if(link.length && link[0].energy < link[0].energyCapacity)
