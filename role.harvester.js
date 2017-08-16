@@ -14,13 +14,17 @@ var roleHarvester = {
 		    if(targets.length > 0) {
 			    for(var resIdx in creep.carry)
 			    {
-	                console.log(resIdx);
-				    if(creep.transfer(targets[0], resIdx) == ERR_NOT_IN_RANGE) 
-					{
-    					creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
-    				}
-    				return;
+	                if(creep.carry[resIdx] > 0)
+	                {
+    	                var result = creep.transfer(targets[0], resIdx);
+    				    if(creep.transfer(targets[0], resIdx) == ERR_NOT_IN_RANGE) 
+    					{
+        					creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+    				        return;
+        				}
+	                }
 				}	
+    			return;
 			}
 		}
         //console.log(creep.carry.energy + ' ' + creep.carryCapacity);
