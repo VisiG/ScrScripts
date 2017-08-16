@@ -15,15 +15,15 @@ var roleReserver = {
 	}
         else
         {
-            if(creep.room.name != targetRoomPosition.name)
+            if(creep.room.name != targetRoomPosition.roomName)
             {
                 creep.moveTo(targetRoomPosition, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
             else
             {
-                controller = hownSpawn.room.find(FIND_STRUCTURES, {
+                controller = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCUTRE_CONTROLLER)}});
+                        return (structure.structureType == STRUCTURE_CONTROLLER)}});
                 if(creep.reserveController(controller[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(controller[0], {visualizePathStyle: {stroke: '#ffaa00'}});
                 }        
