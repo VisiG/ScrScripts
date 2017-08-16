@@ -291,8 +291,9 @@ module.exports.loop = function () {
                             return (structure.structureType == STRUCTURE_TOWER);
                         }
                 });
-    for(var tower in towers);
+    for(var towerIdx in towers);
     {
+        var tower = towers[towerIdx];
         if(tower.energy/tower.energyCapacity > 0.5)
         {
             var closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
