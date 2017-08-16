@@ -21,7 +21,17 @@ var roleRecharger = {
                 //source = creep.pos.findClosestByPath(FIND_SOURCES);
             }
             
-            var result =  creep.harvest(source);
+            
+            var result = null;
+            if(source.structureType == STRUCTURE_LINK)
+            {
+                result = creep.withdraw(source, RESOURCE_ENERGY);
+            }
+            else
+            {
+                result = creep.harvest(source);
+            }
+		    
             if(result == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
