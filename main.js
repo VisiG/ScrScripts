@@ -286,7 +286,7 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
-     var towers = creep.room.find(FIND_STRUCTURES, {
+     var towers = currentSpawn.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_TOWER);
                         }
