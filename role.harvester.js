@@ -11,7 +11,25 @@ var roleHarvester = {
 	        var energy = creep.room.find(FIND_DROPPED_RESOURCES
             );
     
-            if (energy.length) {
+	    totalResources = _.sum(creep.carry - creep.carry.energy);
+	    if(totalResources > 0)
+	    {
+		    var targets = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType == STRUCTURE_STORAGE);
+                        }
+                	});
+		    if(targets.length > 0) {
+			    for(var resIdx in creep.carry)
+			    {
+				    if(creep.transfer(targets[0], creep.carry[resIdx]) == ERR_NOT_IN_RANGE) {
+					creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+					    return;
+				    }
+			    }
+                    }
+	    }
+            else if (energy.length) {
                 if(creep.pickup(energy[0]) != 0)
                 {
                     creep.moveTo(energy[0], {visualizePathStyle: {stroke: '#ffffff'}});
