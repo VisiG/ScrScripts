@@ -52,9 +52,10 @@ module.exports.loop = function () {
             sender = links[1];
             receiver = links[0];
         }
-        if(sender.energy >= sender.energyCapacity && receiver.energy < receiver.energyCapacity)
+        if(sender.energy >= sender.energyCapacity*0.99 && receiver.energy < receiver.energyCapacity)
         {
-            sender.transferEnergy(receiver, (receiver.energyCapacity - receiver.energy));
+            var amountToTransfer = Math.min((receiver.energyCapacity - receiver.energy), sender.energyCapacity - sender.energy);
+            sender.transferEnergy(receiver, amountToTransfer);
         }
     }
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' );
