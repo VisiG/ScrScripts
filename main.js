@@ -311,13 +311,23 @@ module.exports.loop = function () {
             tower.attack(closestHostile);
         }
     }
-
+    var harvesterCnt = 0;
     for(var name in Game.creeps) {
          const startCpu = Game.cpu.getUsed();
         var creep = Game.creeps[name];
         //creep.homeSpawn = currentSpawn.id;
+        
         if(creep.memory.role == 'harvester') {
+            if(harvesterCnt == 1)
+            {
+                creep.reverseFilling = true;
+            }
+            else
+            {
+                creep.reverseFilling = false;                
+            }
             roleHarvester.run(creep);
+            harvesterCnt++;
         }
         else if(creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
