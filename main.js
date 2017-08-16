@@ -81,6 +81,14 @@ module.exports.loop = function () {
                 console.log('Spawning new 250 harvester: ' + newName);
             }
         }
+        else if(roomEnergy >= 1800)
+        {
+            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,
+                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
+                                                    MOVE ,MOVE,MOVE ,MOVE, 
+                                                    MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+            console.log('Spawning new 1200 harvester: ' + newName);
+        }
         else if(roomEnergy >= 1200)
         {
             var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
