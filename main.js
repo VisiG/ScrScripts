@@ -291,7 +291,7 @@ module.exports.loop = function () {
                             return (structure.structureType == STRUCTURE_TOWER);
                         }
                 });
-    for(var towerIdx in towers);
+    for(var towerIdx in towers)
     {
         var tower = towers[towerIdx];
         if(tower.energy/tower.energyCapacity > 0.5)
