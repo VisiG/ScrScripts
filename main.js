@@ -270,8 +270,7 @@ module.exports.loop = function () {
     {        
         if(roomEnergy >= 1200)
         {
-            var newName = currentSpawn.createCreep([CLAIM, WORK, TOUGH ,TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
-                                                    MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE], undefined, 
+            var newName = currentSpawn.createCreep([CLAIM, CLAIM,MOVE  ,MOVE], undefined, 
                 {role: 'reserver', homeSpawn: currentSpawn.id});
             console.log('Spawning new 1200 reserver: ' + newName);
         }
