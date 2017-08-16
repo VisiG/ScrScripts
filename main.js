@@ -363,7 +363,7 @@ module.exports.loop = function () {
             roleReserver.run(creep);
         }
         else if(creep.memory.role == 'linkRecharger') {
-            creep.memory.targetSource = Game.getObjectById('5994774086537c0bdbbb2fa4');
+            creep.memory.targetSource = '5994774086537c0bdbbb2fa4';
             roleRecharger.run(creep);
         }
    
