@@ -22,8 +22,8 @@ var roleRecharger = {
             }
             
             
-            var result = null;
-            if(source.structureType == STRUCTURE_LINK)
+            var result = -100;
+            if(source && source.structureType == STRUCTURE_LINK)
             {
                 result = creep.withdraw(source, RESOURCE_ENERGY);
             }
