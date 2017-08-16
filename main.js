@@ -272,7 +272,7 @@ module.exports.loop = function () {
         {
             var newName = currentSpawn.createCreep([CLAIM, WORK, TOUGH ,TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
                                                     MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE], undefined, 
-                {role: 'reserver', homeSpawn: currentSpawn.id, targetSource: reserverRoomPosition });
+                {role: 'reserver', homeSpawn: currentSpawn.id});
             console.log('Spawning new 1200 reserver: ' + newName);
         }
         
@@ -330,6 +330,7 @@ module.exports.loop = function () {
             roleRecharger.run(creep);
         }
         else if(creep.memory.role == 'roadRepairer') {
+            creep.memory.targetRoomPosition = reserverRoomPosition ;
             roleRoadRepairer.run(creep);
         }
         else if(creep.memory.role == 'reserver') {
