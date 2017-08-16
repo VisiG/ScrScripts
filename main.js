@@ -320,11 +320,11 @@ module.exports.loop = function () {
         if(creep.memory.role == 'harvester') {
             if(harvesterCnt == 1)
             {
-                creepp.memory.reverseFilling = true;
+                creep.memory.reverseFilling = true;
             }
             else
             {
-                creepp.memory.reverseFilling = false;                
+                creep.memory.reverseFilling = false;                
             }
             roleHarvester.run(creep);
             harvesterCnt++;
