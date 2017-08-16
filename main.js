@@ -31,6 +31,8 @@ module.exports.loop = function () {
     currentSpawn.memory.currentRoadTimer++;
     if(currentSpawn.memory.currentRoadTimer >= linkCheckInterval)
     {
+        
+        currentSpawn.memory.currentRoadTimer = 0;
         console.log("Checking links");
         
         var storage = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
@@ -53,8 +55,6 @@ module.exports.loop = function () {
         {
             sender.transferEnergy(receiver, (receiver.energyCapacity - receiver.energy));
         }
-        
-        currentSpawn.memory.currentRoadTimer = 0;
     }
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' );
     //console.log('Harvesters: ' + harvesters.length);
