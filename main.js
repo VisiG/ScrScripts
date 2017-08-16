@@ -281,7 +281,7 @@ module.exports.loop = function () {
     if(currentSpawn.spawning) {
         var spawningCreep = Game.creeps[currentSpawn.spawning.name];
         currentSpawn.room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
+            'ð ï¸' + spawningCreep.memory.role,
             currentSpawn.pos.x + 1,
             currentSpawn.pos.y,
             {align: 'left', opacity: 0.8});
@@ -330,10 +330,10 @@ module.exports.loop = function () {
             roleRecharger.run(creep);
         }
         else if(creep.memory.role == 'roadRepairer') {
-            creep.memory.targetRoomPosition = reserverRoomPosition ;
             roleRoadRepairer.run(creep);
         }
         else if(creep.memory.role == 'reserver') {
+            creep.memory.targetRoomPosition = reserverRoomPosition ;
             roleReserver.run(creep);
         }
    
