@@ -40,8 +40,6 @@ module.exports.loop = function () {
         var links = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
                 return object.structureType == STRUCTURE_LINK
             }});
-        console.log(links[0]);
-        console.log(links[1]);
         var link1Distance = storage[0].pos.getRangeTo(links[0]);
         var link2Distance = storage[0].pos.getRangeTo(links[1]);
       
