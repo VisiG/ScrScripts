@@ -34,10 +34,10 @@ module.exports.loop = function () {
         console.log("Checking links");
         
         var storage = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
-                return object.structureType === STRUCTURE_STORAGE
+                return object.structureType == STRUCTURE_STORAGE
             }});
         var links = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
-                return object.structureType === STRUCTURE_LINKS
+                return object.structureType == STRUCTURE_LINKS
             }});
         var link1Distance = storage.pos.getRangeTo(links[0]);
         var link2Distance = storage.pos.getRangeTo(links[1]);
