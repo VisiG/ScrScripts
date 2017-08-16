@@ -92,7 +92,7 @@ module.exports.loop = function () {
                                                     CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
                                                     MOVE ,MOVE,MOVE ,MOVE, 
                                                     MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1200 harvester: ' + newName);
+            console.log('Spawning new 1800 harvester: ' + newName);
         }
         else if(roomEnergy >= 1200)
         {
@@ -135,7 +135,7 @@ module.exports.loop = function () {
                                                     CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
                                                     MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
                                                     MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1200 upgrader: ' + newName);
+            console.log('Spawning new 1800 upgrader: ' + newName);
         }
         else if(roomEnergy >= 1200)
         {
@@ -256,7 +256,7 @@ module.exports.loop = function () {
                                                     MOVE ,MOVE ,MOVE,MOVE , MOVE ,
                                                     MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE , MOVE, MOVE], undefined, 
                 {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
-            console.log('Spawning new 1300 inter recharger: ' + newName);
+            console.log('Spawning new 1800 inter recharger: ' + newName);
         }
         else if(roomEnergy >= 1300)
         {
@@ -268,11 +268,11 @@ module.exports.loop = function () {
     }
     else if (reservers.length < 1)
     {        
-        if(roomEnergy >= 1200)
+        if(roomEnergy >= 1300)
         {
             var newName = currentSpawn.createCreep([CLAIM, CLAIM,MOVE  ,MOVE], undefined, 
                 {role: 'reserver', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1200 reserver: ' + newName);
+            console.log('Spawning new 1300 reserver: ' + newName);
         }
         
     }
