@@ -1,5 +1,6 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
+var roleUpgraderStorage = require('role.upgraderFromStorage');
 var roleBuilder = require('role.builder');
 var roleRecharger = require('role.recharger');
 var roleRoadRepairer = require('role.roadRepairer');
@@ -29,12 +30,13 @@ module.exports.loop = function () {
        currentSpawn.memory.currentRoadTimer = 0; 
     }
     currentSpawn.memory.currentRoadTimer++;
+    var storage;
     if(currentSpawn.memory.currentRoadTimer >= linkCheckInterval)
     {
         currentSpawn.memory.currentRoadTimer = 0;
         console.log("Checking links");
         
-        var storage = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
+        storage = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
                 return object.structureType == STRUCTURE_STORAGE
             }});
         var links = currentSpawn.room.find(FIND_STRUCTURES, {filter: function(object){
@@ -59,6 +61,8 @@ module.exports.loop = function () {
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester' );
     //console.log('Harvesters: ' + harvesters.length);
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+    //console.log('upgrader: ' + harvesters.length);
+    var upgradersStorage = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgraderFromStorage');
     //console.log('upgrader: ' + harvesters.length);
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     //console.log('builder: ' + harvesters.length);
@@ -285,6 +289,17 @@ module.exports.loop = function () {
         }
         
     }
+    else if(upgradersStorage < 3 && storage != null && storage.store[RESOURCE_ENERGY] > 500000)
+    {
+        if(roomEnergy >= 1800)
+        {
+            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
+                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                                                    MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
+                                                    MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgraderFromStorage', homeSpawn: currentSpawn.id});
+            console.log('Spawning new 1800 upgraderFromStorage: ' + newName);
+        }
+    }
     
     if(currentSpawn.spawning) {
         var spawningCreep = Game.creeps[currentSpawn.spawning.name];
@@ -364,6 +379,9 @@ module.exports.loop = function () {
         else if(creep.memory.role == 'linkRecharger') {
             creep.memory.targetSource = '5994774086537c0bdbbb2fa4';
             roleRecharger.run(creep);
+        }
+        else if(creep.memory.role == 'upgraderFromStorage') {
+            roleUpgraderStorage.run(creep);
         }
    
 
