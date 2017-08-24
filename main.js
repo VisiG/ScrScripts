@@ -289,7 +289,7 @@ module.exports.loop = function () {
         }
         
     }
-    else if(upgradersStorage < 3 && storage != null && )
+    else if(upgradersStorage < 3 && storage != null)
     {
         if(storage.store[RESOURCE_ENERGY] > 500000 && roomEnergy >= 1800)
         {
