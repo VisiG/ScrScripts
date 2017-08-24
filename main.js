@@ -289,9 +289,9 @@ module.exports.loop = function () {
         }
         
     }
-    else if(upgradersStorage < 3 && storage != null && storage.store[RESOURCE_ENERGY] > 500000)
+    else if(upgradersStorage < 3 && storage != null && )
     {
-        if(roomEnergy >= 1800)
+        if(storage.store[RESOURCE_ENERGY] > 500000 && roomEnergy >= 1800)
         {
             var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
                                                     CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
