@@ -33,7 +33,7 @@ var roleBuilder = {
                 else
                 {
                     const targets = hownSpawn.room.find(FIND_STRUCTURES, {
-                        filter: object => object.hits < object.hitsMax && object.structureType != STRUCTURE_WALL
+                        filter: object => object.hits < object.hitsMax && object.structureType != STRUCTURE_WALL && object.structureType != STRUCTURE_WALL
                     });
                     
                     targets.sort((a,b) => a.hits - b.hits);
