@@ -80,6 +80,7 @@ module.exports.loop = function () {
     var roomEnergy = currentSpawn.room.energyCapacityAvailable;
     var roomEnergyAvailable = currentSpawn.room.energyAvailable;
     if(harvesters.length < 2) {
+        console.log(harvesters.length + ' ' + );
         if(harvesters.length < 1 && roomEnergy <= 300)
         {
             if(currentSpawn.room.energyAvailable >= 250)
@@ -89,7 +90,7 @@ module.exports.loop = function () {
                 console.log('Spawning new 250 harvester: ' + newName);
             }
         }
-        else if(roomEnergy >= 1500)
+        else if(roomEnergy >= 1800)
         {
             var newName = currentSpawn.createCreep([WORK, 
                                                     CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
