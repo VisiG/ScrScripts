@@ -81,12 +81,44 @@ module.exports.loop = function () {
     var roomEnergyAvailable = currentSpawn.room.energyAvailable;
     if(harvesters.length < 2) {
         console.log(harvesters.length + ' ' + roomEnergy);
-        if(harvesters.length < 1 && roomEnergy <= 300)
+        if(harvesters.length < 1)
         {
-            if(currentSpawn.room.energyAvailable >= 250)
+            if(roomEnergyAvailable >= 1800)
+            {
+                var newName = currentSpawn.createCreep([WORK, 
+                                                        CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
+                                                        MOVE,
+                                                        MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 1800 harvester: ' + newName);
+            }
+            else if(roomEnergyAvailable >= 1200)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 1200 harvester: ' + newName);
+            }
+            else if(roomEnergyAvailable >= 800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 800 harvester: ' + newName);
+            }
+            else if(roomEnergyAvailable >= 650)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 650 harvester: ' + newName);
+            }
+            else if(roomEnergyAvailable >= 550)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 550 harvester: ' + newName);
+            }
+            else if(roomEnergyAvailable >= 400)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 400 harvester: ' + newName);
+            }
+            else if(roomEnergyAvailable >= 250)
             {
                 var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-                Game.creeps[newName].name = Game.creeps[newName].name;
                 console.log('Spawning new 250 harvester: ' + newName);
             }
         }
