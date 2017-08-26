@@ -80,7 +80,7 @@ module.exports.loop = function () {
     var roomEnergy = currentSpawn.room.energyCapacityAvailable;
     var roomEnergyAvailable = currentSpawn.room.energyAvailable;
     if(harvesters.length < 2) {
-        console.log(harvesters.length + ' ' + );
+        console.log(harvesters.length + ' ' + roomEnergy);
         if(harvesters.length < 1 && roomEnergy <= 300)
         {
             if(currentSpawn.room.energyAvailable >= 250)
