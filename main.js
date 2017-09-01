@@ -351,7 +351,12 @@ module.exports.loop = function () {
     for(var towerIdx in towers)
     {
         var tower = towers[towerIdx];
-        if(tower.energy/tower.energyCapacity > 0.5)
+        
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile) {
+            tower.attack(closestHostile);
+        }
+        else if(tower.energy/tower.energyCapacity > 0.5)
         {
             var closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
                 filter: (structure) => 
@@ -366,11 +371,7 @@ module.exports.loop = function () {
                 tower.repair(closestDamagedStructure[0]);
             }
         }
-
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
-        }
+        
     }
     var harvesterCnt = 0;
     for(var name in Game.creeps) {
