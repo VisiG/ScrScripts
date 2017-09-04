@@ -24,7 +24,9 @@ module.exports.loop = function () {
         }
     }
     
-    var currentSpawn = Game.spawns['Spawn1'];
+    var spawn1 = Game.spawns['Spawn1'];
+    var spawn2 = Game.spawns['Spawn2'];
+    var currentSpawn = spawn1;
     if(!currentSpawn.memory.currentRoadTimer)
     {
        currentSpawn.memory.currentRoadTimer = 0; 
@@ -77,13 +79,61 @@ module.exports.loop = function () {
     var reservers = _.filter(Game.creeps, (creep) => creep.memory.role == 'reserver');
     //console.log('builder: ' + harvesters.length);
 
-    var roomEnergy = currentSpawn.room.energyCapacityAvailable;
-    var roomEnergyAvailable = currentSpawn.room.energyAvailable;
-    if(harvesters.length < 2) {
-        console.log(harvesters.length + ' ' + roomEnergyAvailable);
-        if(harvesters.length < 1)
-        {
-            if(roomEnergyAvailable >= 1800)
+    if(currentSpawn.spawning) {
+        currentSpawn = spawn2;
+        if(currentSpawn.spawning) {
+            currentSpawn = null;
+        }
+    }
+    
+    if(currentSpawn != null)
+    {
+        var roomEnergy = currentSpawn.room.energyCapacityAvailable;
+        var roomEnergyAvailable = currentSpawn.room.energyAvailable;
+        if(harvesters.length < 2) {
+            console.log(harvesters.length + ' ' + roomEnergyAvailable);
+            if(harvesters.length < 1)
+            {
+                if(roomEnergyAvailable >= 1800)
+                {
+                    var newName = currentSpawn.createCreep([WORK, 
+                                                            CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
+                                                            MOVE,
+                                                            MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 1800 harvester: ' + newName);
+                }
+                else if(roomEnergyAvailable >= 1200)
+                {
+                    var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 1200 harvester: ' + newName);
+                }
+                else if(roomEnergyAvailable >= 800)
+                {
+                    var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 800 harvester: ' + newName);
+                }
+                else if(roomEnergyAvailable >= 650)
+                {
+                    var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 650 harvester: ' + newName);
+                }
+                else if(roomEnergyAvailable >= 550)
+                {
+                    var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 550 harvester: ' + newName);
+                }
+                else if(roomEnergyAvailable >= 400)
+                {
+                    var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 400 harvester: ' + newName);
+                }
+                else if(roomEnergyAvailable >= 250)
+                {
+                    var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
+                    console.log('Spawning new 250 harvester: ' + newName);
+                }
+            }
+            else if(roomEnergy >= 1800)
             {
                 var newName = currentSpawn.createCreep([WORK, 
                                                         CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
@@ -91,259 +141,238 @@ module.exports.loop = function () {
                                                         MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 1800 harvester: ' + newName);
             }
-            else if(roomEnergyAvailable >= 1200)
+            else if(roomEnergy >= 1200)
             {
                 var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 1200 harvester: ' + newName);
             }
-            else if(roomEnergyAvailable >= 800)
+            else if(roomEnergy >= 800)
             {
                 var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 800 harvester: ' + newName);
             }
-            else if(roomEnergyAvailable >= 650)
+            else if(roomEnergy >= 650)
             {
                 var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 650 harvester: ' + newName);
             }
-            else if(roomEnergyAvailable >= 550)
+            else if(roomEnergy >= 550)
             {
                 var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 550 harvester: ' + newName);
             }
-            else if(roomEnergyAvailable >= 400)
+            else if(roomEnergy >= 400)
             {
                 var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 400 harvester: ' + newName);
             }
-            else if(roomEnergyAvailable >= 250)
+            else if(currentSpawn.room.energyAvailable >= 250)
             {
                 var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
                 console.log('Spawning new 250 harvester: ' + newName);
             }
         }
-        else if(roomEnergy >= 1800)
+        //else if(harvesters.length < 1) {
+        //}
+        else if (upgraders.length < 3)
         {
-            var newName = currentSpawn.createCreep([WORK, 
-                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY ,
-                                                    MOVE,
-                                                    MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1800 harvester: ' + newName);
+            if(roomEnergy >= 1800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
+                                                        CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                                                        MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
+                                                        MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 1800 upgrader: ' + newName);
+            }
+            else if(roomEnergy >= 1200)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 1200 upgrader: ' + newName);
+            }
+            else if(roomEnergy >= 800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 800 upgrader: ' + newName);
+            }
+            else if(roomEnergy >= 650)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new upgrader: ' + newName);
+            }
+            else if(roomEnergy >= 550)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new upgrader: ' + newName);
+            }
+            else if(roomEnergy >= 400)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new upgrader: ' + newName);
+            }
+            else if(currentSpawn.room.energyAvailable >= 250)
+            {
+                var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
+                console.log('Spawning new upgrader: ' + newName);
+            }
         }
-        else if(roomEnergy >= 1200)
+        else if (builders.length < 2)
         {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1200 harvester: ' + newName);
+            if(roomEnergy >= 800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 800 builder: ' + newName);
+            }
+            else if(roomEnergy >= 650)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
+                console.log('Spawning new builder: ' + newName);
+            }
+            else if(roomEnergy >= 550)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
+                console.log('Spawning new builder: ' + newName);
+            }
+            else if(roomEnergy >= 400)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
+                console.log('Spawning new builder: ' + newName);
+            }
+            else if(currentSpawn.room.energyAvailable >= 250)
+            {
+                var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
+                console.log('Spawning new builder: ' + newName);
+            }
+
         }
-        else if(roomEnergy >= 800)
+        else if (rechargers.length < 1)
         {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 800 harvester: ' + newName);
+            if(roomEnergy >= 1200)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, 
+                    {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID });
+                console.log('Spawning new 1200 recharger: ' + newName);
+            }
+            else if(roomEnergy >= 800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK,CARRY, CARRY,CARRY, CARRY,MOVE ,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
+                console.log('Spawning new 800 recharger: ' + newName);
+            }
+            else if(roomEnergy >= 650)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
+                console.log('Spawning new recharger: ' + newName);
+            }
+            else if(roomEnergy >= 550)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
+                console.log('Spawning new recharger: ' + newName);
+            }
+            else if(roomEnergy >= 400)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
+                console.log('Spawning new recharger: ' + newName);
+            }
+            else if(currentSpawn.room.energyAvailable >= 250)
+            {
+                var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
+                console.log('Spawning new recharger: ' + newName);
+            }
+
         }
-        else if(roomEnergy >= 650)
+        else if (roadRepairer.length < 1)
         {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 650 harvester: ' + newName);
+           if(roomEnergy >= 400)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'roadRepairer', homeSpawn: currentSpawn.id});
+                console.log('Spawning new roadRepairer: ' + newName);
+            }
+            else if(currentSpawn.room.energyAvailable >= 250)
+            {
+                var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'roadRepairer', homeSpawn: currentSpawn.id});
+                console.log('Spawning new roadRepairer: ' + newName);
+            }
+
         }
-        else if(roomEnergy >= 550)
+        else if (interRechargers.length < 2)
         {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 550 harvester: ' + newName);
+
+            if(roomEnergy >= 1800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK,
+                                                        CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                                                        MOVE ,MOVE ,MOVE,MOVE , MOVE ,
+                                                        MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE , MOVE, MOVE], undefined, 
+                    {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
+                console.log('Spawning new 1800 inter recharger: ' + newName);
+            }
+            else if(roomEnergy >= 1300)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY,MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, 
+                    {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
+                console.log('Spawning new 1300 inter recharger: ' + newName);
+            }
+
         }
-        else if(roomEnergy >= 400)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 400 harvester: ' + newName);
+        else if (reservers.length < 1)
+        {        
+            if(roomEnergy >= 1300)
+            {
+                var newName = currentSpawn.createCreep([CLAIM, CLAIM,MOVE  ,MOVE], undefined, 
+                    {role: 'reserver', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 1300 reserver: ' + newName);
+            }
+
         }
-        else if(currentSpawn.room.energyAvailable >= 250)
-        {
-            var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'harvester', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 250 harvester: ' + newName);
+        else if (linkRechargers.length < 1)
+        {        
+            if(roomEnergy >= 250)
+            {
+                var newName = currentSpawn.createCreep([CARRY, CARRY,MOVE  ,MOVE], undefined, 
+                    {role: 'linkRecharger', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 200 linkRecharger: ' + newName);
+            }
+
         }
-    }
-    //else if(harvesters.length < 1) {
-    //}
-    else if (upgraders.length < 3)
-    {
-        if(roomEnergy >= 1800)
+        else if(upgradersStorage < 3 && storage != null)
         {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
-                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-                                                    MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
-                                                    MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1800 upgrader: ' + newName);
+            if(storage[0].store[RESOURCE_ENERGY] > 500000 && roomEnergy >= 1800)
+            {
+                var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
+                                                        CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                                                        MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
+                                                        MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgraderFromStorage', homeSpawn: currentSpawn.id});
+                console.log('Spawning new 1800 upgraderFromStorage: ' + newName);
+            }
         }
-        else if(roomEnergy >= 1200)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1200 upgrader: ' + newName);
-        }
-        else if(roomEnergy >= 800)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 800 upgrader: ' + newName);
-        }
-        else if(roomEnergy >= 650)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new upgrader: ' + newName);
-        }
-        else if(roomEnergy >= 550)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new upgrader: ' + newName);
-        }
-        else if(roomEnergy >= 400)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new upgrader: ' + newName);
-        }
-        else if(currentSpawn.room.energyAvailable >= 250)
-        {
-            var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'upgrader', homeSpawn: currentSpawn.id});
-            console.log('Spawning new upgrader: ' + newName);
-        }
-    }
-    else if (builders.length < 2)
-    {
-        if(roomEnergy >= 800)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,WORK,CARRY, CARRY,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 800 builder: ' + newName);
-        }
-        else if(roomEnergy >= 650)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
-            console.log('Spawning new builder: ' + newName);
-        }
-        else if(roomEnergy >= 550)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
-            console.log('Spawning new builder: ' + newName);
-        }
-        else if(roomEnergy >= 400)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
-            console.log('Spawning new builder: ' + newName);
-        }
-        else if(currentSpawn.room.energyAvailable >= 250)
-        {
-            var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'builder', homeSpawn: currentSpawn.id});
-            console.log('Spawning new builder: ' + newName);
-        }
-        
-    }
-    else if (rechargers.length < 1)
-    {
-        if(roomEnergy >= 1200)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, 
-                {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID });
-            console.log('Spawning new 1200 recharger: ' + newName);
-        }
-        else if(roomEnergy >= 800)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK,CARRY, CARRY,CARRY, CARRY,MOVE ,MOVE, MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
-            console.log('Spawning new 800 recharger: ' + newName);
-        }
-        else if(roomEnergy >= 650)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY, CARRY,MOVE ,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
-            console.log('Spawning new recharger: ' + newName);
-        }
-        else if(roomEnergy >= 550)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK,CARRY,MOVE,MOVE, MOVE ,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
-            console.log('Spawning new recharger: ' + newName);
-        }
-        else if(roomEnergy >= 400)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
-            console.log('Spawning new recharger: ' + newName);
-        }
-        else if(currentSpawn.room.energyAvailable >= 250)
-        {
-            var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'recharger', homeSpawn: currentSpawn.id, targetSource: rechargerHomeSourceID});
-            console.log('Spawning new recharger: ' + newName);
-        }
-        
-    }
-    else if (roadRepairer.length < 1)
-    {
-       if(roomEnergy >= 400)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK,CARRY,MOVE,MOVE,MOVE], undefined, {role: 'roadRepairer', homeSpawn: currentSpawn.id});
-            console.log('Spawning new roadRepairer: ' + newName);
-        }
-        else if(currentSpawn.room.energyAvailable >= 250)
-        {
-            var newName = currentSpawn.createCreep([WORK, CARRY,MOVE,MOVE], undefined, {role: 'roadRepairer', homeSpawn: currentSpawn.id});
-            console.log('Spawning new roadRepairer: ' + newName);
-        }
-        
-    }
-    else if (interRechargers.length < 2)
-    {
-        
-        if(roomEnergy >= 1800)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK,
-                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-                                                    MOVE ,MOVE ,MOVE,MOVE , MOVE ,
-                                                    MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE,MOVE , MOVE, MOVE], undefined, 
-                {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
-            console.log('Spawning new 1800 inter recharger: ' + newName);
-        }
-        else if(roomEnergy >= 1300)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK,CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY,MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE], undefined, 
-                {role: 'interRecharger', homeSpawn: currentSpawn.id, targetSource: interSourceID });
-            console.log('Spawning new 1300 inter recharger: ' + newName);
-        }
-        
-    }
-    else if (reservers.length < 1)
-    {        
-        if(roomEnergy >= 1300)
-        {
-            var newName = currentSpawn.createCreep([CLAIM, CLAIM,MOVE  ,MOVE], undefined, 
-                {role: 'reserver', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1300 reserver: ' + newName);
-        }
-        
-    }
-    else if (linkRechargers.length < 1)
-    {        
-        if(roomEnergy >= 250)
-        {
-            var newName = currentSpawn.createCreep([CARRY, CARRY,MOVE  ,MOVE], undefined, 
-                {role: 'linkRecharger', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 200 linkRecharger: ' + newName);
-        }
-        
-    }
-    else if(upgradersStorage < 3 && storage != null)
-    {
-        if(storage[0].store[RESOURCE_ENERGY] > 500000 && roomEnergy >= 1800)
-        {
-            var newName = currentSpawn.createCreep([WORK, WORK, WORK, WORK, WORK, WORK,
-                                                    CARRY, CARRY ,CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-                                                    MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE, 
-                                                    MOVE, MOVE ,MOVE ,MOVE,MOVE ,MOVE, MOVE ,MOVE ,MOVE], undefined, {role: 'upgraderFromStorage', homeSpawn: currentSpawn.id});
-            console.log('Spawning new 1800 upgraderFromStorage: ' + newName);
+        if(currentSpawn.spawning) {
+            var spawningCreep = Game.creeps[currentSpawn.spawning.name];
+            currentSpawn.room.visual.text(
+                '🛠️' + spawningCreep.memory.role,
+                currentSpawn.pos.x + 1,
+                currentSpawn.pos.y,
+                {align: 'left', opacity: 0.8});
         }
     }
     
-    if(currentSpawn.spawning) {
-        var spawningCreep = Game.creeps[currentSpawn.spawning.name];
-        currentSpawn.room.visual.text(
-            '🛠️' + spawningCreep.memory.role,
-            currentSpawn.pos.x + 1,
-            currentSpawn.pos.y,
-            {align: 'left', opacity: 0.8});
-    }
+    if(spawn1.spawning) {
+            var spawningCreep = Game.creeps[spawn1.spawning.name];
+            spawn1.room.visual.text(
+                '🛠️' + spawningCreep.memory.role,
+                spawn1.pos.x + 1,
+                spawn1.pos.y,
+                {align: 'left', opacity: 0.8});
+        }
+    if(spawn2.spawning) {
+            var spawningCreep = Game.creeps[spawn2.spawning.name];
+            spawn2.room.visual.text(
+                '🛠️' + spawningCreep.memory.role,
+                spawn2.pos.x + 1,
+                spawn2.pos.y,
+                {align: 'left', opacity: 0.8});
+        }
+    
 
-     var towers = currentSpawn.room.find(FIND_STRUCTURES, {
+    var towers = currentSpawn.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_TOWER);
                         }
