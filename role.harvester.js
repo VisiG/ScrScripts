@@ -2,11 +2,12 @@ var roleHarvester = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+		 var hownSpawn = Game.getObjectById(creep.memory.homeSpawn);
 	    var doReverse = creep.memory.reverseFilling;
 		totalResources = _.sum(creep.carry) - creep.carry.energy;
 	    if(totalResources > 0)
 	    {
-		    var targets = creep.room.find(FIND_STRUCTURES, {
+		    var targets = hownSpawn.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_STORAGE);
                         }
@@ -34,8 +35,8 @@ var roleHarvester = {
 		}
 		if(creep.memory.needEnergy && (creep.carry.energy < creep.carryCapacity)) 
 		{
-			var energy = creep.room.find(FIND_DROPPED_RESOURCES);
-			if (energy.length) 
+			var energy = hownSpawn.room.find(FIND_DROPPED_RESOURCES);
+			if (energy.length && energy[0] > 50) 
 			{
 				if(creep.pickup(energy[0]) != 0)
 				{
@@ -45,7 +46,7 @@ var roleHarvester = {
 			}
 			else
 			{
-				var targets = creep.room.find(FIND_STRUCTURES, {
+				var targets = hownSpawn.room.find(FIND_STRUCTURES, {
 					filter: (structure) => {
 						return (structure.structureType == STRUCTURE_STORAGE &&  _.sum(structure.store) > 0);
 					}
@@ -67,7 +68,7 @@ var roleHarvester = {
 					}
 					else if(result == ERR_NOT_ENOUGH_RESOURCES)
 					{
-						source2 = creep.room.find(FIND_SOURCES, {
+						source2 = hownSpawn.room.find(FIND_SOURCES, {
 							filter: (structure) => {
 								return (structure.id != source.id)}});
 
@@ -84,7 +85,7 @@ var roleHarvester = {
 			}
 		}
         else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            var targets = hownSpawn.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
                                 structure.structureType == STRUCTURE_SPAWN ||
@@ -102,7 +103,7 @@ var roleHarvester = {
             }
             else
             {
-                var targets = creep.room.find(FIND_STRUCTURES, {
+                var targets = hownSpawn.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity);
                         }
