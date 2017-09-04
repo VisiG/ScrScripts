@@ -372,7 +372,7 @@ module.exports.loop = function () {
         }
     
 
-    var towers = currentSpawn.room.find(FIND_STRUCTURES, {
+    var towers = spawn1.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_TOWER);
                         }
