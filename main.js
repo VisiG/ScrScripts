@@ -391,7 +391,7 @@ module.exports.loop = function () {
                 filter: (structure) => 
                 (structure.hits < structure.hitsMax) && 
                 ( ((structure.structureType != STRUCTURE_WALL) && 
-                  (structure.structureType != STRUCTURE_RAMPART)) || (structure.structureType == STRUCTURE_WALL && structure.hits < 30000)
+                  (structure.structureType != STRUCTURE_RAMPART)) || (structure.structureType == STRUCTURE_WALL && structure.hits < 80000)
                                                                                || (structure.structureType == STRUCTURE_RAMPART && structure.hits < 100000))
             });
             closestDamagedStructure.sort((a,b) => a.hits/a.hitsMax - b.hits/b.hitsMax);
