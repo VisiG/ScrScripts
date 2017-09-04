@@ -36,7 +36,7 @@ var roleHarvester = {
 		if(creep.memory.needEnergy && (creep.carry.energy < creep.carryCapacity)) 
 		{
 			var energy = hownSpawn.room.find(FIND_DROPPED_RESOURCES);
-			if (energy.length && energy[0] > 50) 
+			if (energy.length && energy[0].energy > 50) 
 			{
 				if(creep.pickup(energy[0]) != 0)
 				{
