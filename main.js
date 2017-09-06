@@ -381,9 +381,18 @@ module.exports.loop = function () {
     {
         var tower = towers[towerIdx];
         
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
+        var closestHostile = tower.pos.find(FIND_HOSTILE_CREEPS, {
+            filter: function(object) {
+                return object.getActiveBodyparts(HEAL) > 0;
+            }
+        }));
+        var closestHostile2 = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile.length > 0) {
+            tower.attack(closestHostile[0]);
+        }
+        else if(closestHostile2)
+        {
+            tower.attack(closestHostile2);                
         }
         else if(tower.energy/tower.energyCapacity > 0.5)
         {
