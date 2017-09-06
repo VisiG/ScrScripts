@@ -385,7 +385,7 @@ module.exports.loop = function () {
             filter: function(object) {
                 return object.getActiveBodyparts(HEAL) > 0;
             }
-        }));
+        });
         var closestHostile2 = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile.length > 0) {
             tower.attack(closestHostile[0]);
