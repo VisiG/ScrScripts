@@ -381,7 +381,7 @@ module.exports.loop = function () {
     {
         var tower = towers[towerIdx];
         
-        var closestHostile = tower.pos.find(FIND_HOSTILE_CREEPS, {
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: function(object) {
                 return object.getActiveBodyparts(HEAL) > 0;
             }
