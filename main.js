@@ -387,8 +387,8 @@ module.exports.loop = function () {
             }
         });
         var closestHostile2 = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile.length > 0) {
-            tower.attack(closestHostile[0]);
+        if(closestHostile) {
+            tower.attack(closestHostile);
         }
         else if(closestHostile2)
         {
